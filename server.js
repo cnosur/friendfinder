@@ -1,4 +1,6 @@
 var express = require("express");
+var path = require("path");
+
 
 var app = express();
 
@@ -10,14 +12,12 @@ var PORT = process.env.PORT || 3000;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-var exphbs = require("express-handlebars");
-
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
-app.set("view engine", "handlebars");
-
-var mysql = require("mysql");
-
 
 app.get("/", function(req, res) {
-    res.json(path.join(__dirname, "public/home.html"));
+    res.sendFile(path.join(__dirname, "./app/public/home.html"));
   });
+
+
+  app.listen(PORT, function() {
+    console.log("It works");
+  })
